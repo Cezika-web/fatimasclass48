@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Resumo Pós-Aula — Fatima — CZK English</title>
+
+  <style>
+    :root{
+      --page-bg: #f4f7fa;
+      --card-bg: #fff;
+      --accent: #2f86e6;
+      --accent-dark: #1f6fd1;
+      --green: #36b37e;
+      --muted: #6b7280;
+      --border: #e6eef8;
+      --box-radius: 12px;
+      --card-width: 720px;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      padding:0;
+      background:var(--page-bg);
+      font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    .wrap{
+      min-height:100%;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:48px 20px;
+    }
+
+    .card{
+      width:100%;
+      max-width:var(--card-width);
+      background:var(--card-bg);
+      border-radius:18px;
+      padding:28px;
+      box-shadow:0 6px 22px rgba(33,47,60,0.06);
+      border:1px solid rgba(15,33,64,0.03);
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:8px;
+    }
+
+    .badge{
+      background:linear-gradient(180deg,#fff,#f2fbff);
+      border:1px solid var(--border);
+      padding:8px 12px;
+      border-radius:999px;
+      color:var(--accent);
+      font-weight:700;
+      font-size:0.85rem;
+    }
+
+    h1{
+      margin:0;
+      font-size:1.3rem;
+      color:#0f1724;
+    }
+
+    .meta{
+      color:var(--muted);
+      font-size:0.92rem;
+      margin-top:6px;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:10px;
+      border:none;
+      background:var(--accent);
+      color:#fff;
+      text-decoration:none;
+      font-weight:600;
+      cursor:pointer;
+      box-shadow:0 6px 14px rgba(47,134,230,0.12);
+    }
+
+    .btn.secondary{
+      background:#fff;
+      color:var(--accent);
+      border:1px solid var(--border);
+      box-shadow:none;
+    }
+
+    main{margin-top:18px;}
+    section{margin-top:18px;}
+
+    .panel{
+      background:#fbfdff;
+      border-radius:12px;
+      padding:16px;
+      border:1px solid var(--border);
+    }
+
+    .outline-card{
+      border-radius:10px;
+      border:1px solid var(--border);
+      padding:16px;
+      background:#fff;
+    }
+
+    /* Vocabulary boxes */
+    .vocab-grid{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .vocab{
+      flex:1;
+      min-width:220px;
+      border-radius:10px;
+      padding:14px;
+      border:2px solid #dfeefe;
+      background:#fff;
+    }
+
+    .vocab.green{
+      border-color:#c9f3dc;
+      background:#f5fff6;
+    }
+
+    .vocab h3{
+      margin:0;
+      font-size:1rem;
+      color:#154360;
+    }
+
+    .vocab p{
+      margin:8px 0 0 0;
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+
+    /* Transcrição / gravação buttons */
+    .media-row{
+      display:flex;
+      gap:14px;
+      margin-top:12px;
+      flex-wrap:wrap;
+    }
+
+    .media-btn{
+      background:#fff;
+      border:1px solid var(--border);
+      padding:12px 16px;
+      border-radius:10px;
+      font-weight:700;
+      color:var(--accent);
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      min-width:200px;
+      justify-content:center;
+    }
+
+    /* Homework box */
+    .homework{
+      background:#f3fff6;
+      border:1px solid #d7f5df;
+      border-radius:10px;
+      padding:14px;
+      margin-top:10px;
+    }
+
+    /* ===== TALK TIME – TABELA RETANGULAR ===== */
+    .speaking{
+      margin-top:18px;
+      padding:16px;
+      border-radius:12px;
+      background:linear-gradient(180deg,#ffffff,#fbfdff);
+      border:1px solid var(--border);
+      max-width:640px;
+    }
+
+    .speaking h2{
+      margin:0 0 10px 0;
+      font-size:1.05rem;
+      color:#0f1724;
+    }
+
+    .talk-table{
+      width:100%;
+      border-collapse:collapse;
+      border-radius:10px;
+      overflow:hidden;
+      background:#fff;
+      border:1px solid #e1e9f5;
+      font-size:0.9rem;
+    }
+
+    .talk-table th,
+    .talk-table td{
+      padding:8px 10px;
+      text-align:left;
+    }
+
+    .talk-table th{
+      background:#eef4ff;
+      color:#1b3556;
+      font-weight:700;
+      border-bottom:1px solid #dde6fa;
+    }
+
+    .row-teacher{
+      background:#e7f2ff; /* azul clarinho */
+    }
+
+    .row-student{
+      background:#e8f7ef; /* verde clarinho */
+    }
+
+    .talk-label{
+      font-weight:700;
+    }
+
+    .talk-percent{
+      font-weight:700;
+      color:#0f1724;
+    }
+
+    .talk-time{
+      color:var(--muted);
+    }
+
+    footer{
+      margin-top:20px;
+      color:var(--muted);
+      font-size:0.9rem;
+      text-align:center;
+    }
+
+    /* responsive */
+    @media (max-width:720px){
+      .card{padding:18px;border-radius:14px;}
+      .vocab-grid{flex-direction:column;}
+      .media-row{flex-direction:column;}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <article class="card" role="main">
+      <header>
+        <div>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <span class="badge">PÓS-AULA</span>
+            <h1>Revisão — passado simples, possessivos, apostrophe + s e verbo to be</h1>
+          </div>
+          <div class="meta" style="margin-top:8px;">
+            <strong>Professor:</strong> César &nbsp;•&nbsp;
+            <strong>Aluno:</strong> Fatima &nbsp;•&nbsp;
+            <strong>Data:</strong> 04/08/2026
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="btn" href="#" onclick="window.print();return false;">Imprimir / Salvar PDF</a>
+        </div>
+      </header>
+
+      <main>
+        <section class="panel">
+          <p style="margin:0;font-weight:600;color:#08325a;">
+            Revisão de verbos no passado, possessivos, apostrophe + s, verbo to be, leitura guiada e produção de texto.
+          </p>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Resumo da Aula</h2>
+          <div class="outline-card">
+            <p style="margin:0 0 8px 0;">
+              Nesta aula, fizemos uma <strong>revisão ampla</strong> de conteúdos importantes do início do curso. Começamos com frases sobre a rotina do dia para praticar o <strong>passado simples</strong>, diferenciando verbos regulares e irregulares. Trabalhamos a lógica de <em>work → worked</em> e também verbos/refeições como <em>have lunch</em> e <em>eat lunch</em>, mostrando que <em>lunch</em> sozinho é um substantivo, enquanto a ideia de “almoçar” precisa de um verbo antes.
+            </p>
+            <p style="margin:0 0 8px 0;">
+              Depois, revisamos <strong>pronomes possessivos e adjetivos possessivos</strong>, além do uso de <strong>apostrophe + s</strong> para indicar posse. O ponto mais importante foi entender que a posição do apóstrofo depende de a palavra <strong>terminar ou não em s</strong>, e não apenas da ideia simplificada de “singular ou plural”. Também retomamos <strong>pronouns + verb to be</strong>, contrações e respostas curtas, com frases como <em>I’m not married. I’m single.</em>
+            </p>
+            <p style="margin:0 0 8px 0;">
+              Na parte de leitura, você leu um texto curto sobre uma atriz coreana, praticando vocabulário como <em>date of birth</em>, <em>lives</em>, <em>sometimes</em> e <em>wonderful actress</em>. Em seguida, traduzimos e ajustamos pontos importantes de interpretação, especialmente a diferença entre traduzir literalmente “sua” e escolher corretamente <em>her</em> em inglês, dependendo de quem é a referência.
+            </p>
+            <p style="margin:0;">
+              No final, você produziu um <strong>texto curto sobre uma pessoa escolhida por você</strong>, usando informações básicas como nome, idade, cidade e área de estudo. Encerramos com um vídeo da unidade para observar compreensão auditiva geral, identificando perguntas sobre nome, idade, trabalho e estado civil, mesmo com dificuldade no áudio.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Key Vocabulary</h2>
+          <div class="vocab-grid">
+            <div class="vocab">
+              <h3>had lunch</h3>
+              <p style="margin-top:8px;font-size:0.92rem;color:var(--muted);">
+                <em>(pt) almoçou / almocei</em><br>
+                <small>I had lunch at home.</small>
+              </p>
+            </div>
+            <div class="vocab green">
+              <h3>apostrophe + s</h3>
+              <p style="margin-top:8px;font-size:0.92rem;color:var(--muted);">
+                <em>(pt) forma para indicar posse</em><br>
+                <small>This is Fatima’s car.</small>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Vocabulário da aula</h2>
+          <div class="outline-card">
+            <h3 style="margin-top:0;">Passado simples e rotina</h3>
+            <ul>
+              <li><strong>work / worked</strong> – trabalhar / trabalhou</li>
+              <li><strong>play / played</strong> – jogar / tocou / jogou</li>
+              <li><strong>eat / ate</strong> – comer / comeu</li>
+              <li><strong>have / had</strong> – ter / teve</li>
+              <li><strong>have lunch</strong> – almoçar</li>
+              <li><strong>eat lunch</strong> – almoçar</li>
+              <li><strong>regular verbs</strong> – verbos regulares</li>
+              <li><strong>irregular verbs</strong> – verbos irregulares</li>
+            </ul>
+
+            <h3>Possessivos e estrutura</h3>
+            <ul>
+              <li><strong>my, your, his, her, its, our, their</strong> – meu/minha, seu/sua, dele, dela, dele/dela (coisa/animal), nosso(a), deles/delas</li>
+              <li><strong>apostrophe + s</strong> – marca de posse</li>
+              <li><strong>contractions</strong> – contrações</li>
+              <li><strong>capital letter</strong> – letra maiúscula</li>
+              <li><strong>proper nouns</strong> – substantivos próprios</li>
+            </ul>
+
+            <h3>Leitura e texto</h3>
+            <ul>
+              <li><strong>date of birth</strong> – data de nascimento</li>
+              <li><strong>first name</strong> – primeiro nome</li>
+              <li><strong>last name</strong> – sobrenome</li>
+              <li><strong>field of study</strong> – área de estudo</li>
+              <li><strong>human resources (HR)</strong> – recursos humanos</li>
+              <li><strong>lives</strong> – mora / vive</li>
+              <li><strong>sometimes</strong> – às vezes</li>
+              <li><strong>wonderful</strong> – maravilhoso(a)</li>
+              <li><strong>retired</strong> – aposentado(a)</li>
+              <li><strong>single</strong> – solteiro(a)</li>
+              <li><strong>married</strong> – casado(a)</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Frases modelo da aula</h2>
+          <div class="outline-card">
+            <ul>
+              <li>I worked and had lunch.</li>
+              <li>I ate lunch at home.</li>
+              <li>He is Brazilian.</li>
+              <li>Yes, they are.</li>
+              <li>I’m not married. I’m single.</li>
+              <li>She is not retired.</li>
+              <li>This is Fatima’s car.</li>
+              <li>Her date of birth is January 11th, 1982.</li>
+              <li>She lives in Seoul.</li>
+              <li>She is a wonderful actress.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Correções importantes</h2>
+          <div class="outline-card">
+            <ul>
+              <li><strong>Passado de verbo regular:</strong> em vez de usar <em>work</em> para falar do passado, reforçamos <strong>worked</strong>. Ex.: <em>I worked</em>, não apenas <em>I work</em> quando a ideia é “eu trabalhei”.</li>
+              <li><strong>Lunch não é verbo sozinho:</strong> <em>lunch</em> = almoço. Para dizer “almoçar / almocei”, usamos uma estrutura como <strong>have lunch / had lunch</strong> ou <strong>eat lunch / ate lunch</strong>.</li>
+              <li><strong>Negação com verb to be:</strong> revisamos estruturas como <strong>I’m not married</strong> e <strong>She is not retired</strong>, sem misturar com <em>do not</em> em frases com o verbo <em>to be</em>.</li>
+              <li><strong>Do not / does not / did not:</strong> ficou destacado que essas formas servem para <strong>negação no presente e no passado com outros verbos</strong>. Ex.: <em>I do not work on Sundays.</em> / <em>She does not work here.</em> / <em>I did not work yesterday.</em></li>
+              <li><strong>Pronúncia de “I’m not”:</strong> treinamos a junção e a sonoridade dessa contração para ela sair mais natural na fala.</li>
+              <li><strong>Apostrophe + s:</strong> o foco foi não decorar apenas “singular antes, plural depois”. O mais importante é observar se a palavra <strong>termina em s ou não</strong>. Ex.: <em>student’s</em>, <em>students’</em>, <em>Lucas’</em>.</li>
+              <li><strong>Tradução de “sua”:</strong> quando estamos falando de outra pessoa, muitas vezes o melhor caminho é pensar em <strong>her</strong> ou <strong>his</strong>, e não traduzir automaticamente por <em>your</em>.</li>
+              <li><strong>Pronúncia de “lives”:</strong> corrigimos a leitura dessa palavra no texto para indicar “mora/vive”, evitando uma pronúncia que soasse como outra palavra.</li>
+              <li><strong>Letra maiúscula:</strong> reforçamos o uso em nomes próprios, cidades, países e no início de frases.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Transcrição &amp; Gravação</h2>
+          <div class="media-row">
+            <a class="media-btn" href="#" role="button">📄 Acessar transcrição</a>
+
+            <a
+              class="media-btn"
+              href="https://youtu.be/1BMfq2r31eM"
+              target="_blank"
+              rel="noopener noreferrer"
+              role="button"
+              style="background:linear-gradient(180deg,#1f6fd1,#2f86e6);color:#fff;border:none;min-width:260px;"
+            >
+              🎥 Assistir gravação (acesso privado)
+            </a>
+          </div>
+        </section>
+
+        <section class="speaking" aria-label="Distribuição de fala">
+          <h2>Tempo de Fala (Talk Time)</h2>
+          <table class="talk-table">
+            <thead>
+              <tr>
+                <th>Quem falou</th>
+                <th>Porcentagem</th>
+                <th>Duração aproximada</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-teacher">
+                <td><span class="talk-label">César (Professor)</span></td>
+                <td><span class="talk-percent">66%</span></td>
+                <td class="talk-time">~40 minutos</td>
+              </tr>
+              <tr class="row-student">
+                <td><span class="talk-label">Fatima</span></td>
+                <td><span class="talk-percent">34%</span></td>
+                <td class="talk-time">~20 minutos</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Homework</h2>
+          <div class="homework">
+            <p style="margin:0 0 8px 0;">
+              📌 <strong>Lição de casa (como combinado em aula):</strong>
+            </p>
+            <ul style="margin:0 0 6px 18px;padding:0;font-size:0.94rem;color:var(--muted);">
+              <li>Ler o pós-aula de 2 a 3x na semana.</li>
+            </ul>
+          </div>
+
+          <div style="margin-top:14px;">
+            <a class="btn" href="https://wa.me" style="background:#25D366;border-radius:10px;box-shadow:none;">
+              💬 Falar comigo no WhatsApp
+            </a>
+          </div>
+        </section>
+
+      </main>
+
+      <footer>
+        <p style="margin:18px 0 0 0;color:var(--muted);font-size:0.9rem;">
+          © 2025 CZK English • Este conteúdo é exclusivo para fins educacionais. • Suporte: czkenglish@gmail.com
+        </p>
+      </footer>
+    </article>
+  </div>
+</body>
+</html>
